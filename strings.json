@@ -1,0 +1,80 @@
+{
+    "strings": {
+        "chart_option_field_had_been_deleted": {
+            "zh_CN": "字段已失效，请重新选择",
+            "en_US": "The field is invalid, please select again"
+        },
+        "chart_option_view_had_been_deleted": {
+            "zh_CN": "视图已失效，请重新选择",
+            "en_US": "The view is invalid, please select again"
+        },
+        "count_records": {
+            "zh_CN": "统计记录总数",
+            "en_US": "Count all records"
+        },
+        "design_chart_structure": {
+            "zh_CN": "设计图表结构",
+            "en_US": "Design chart structure"
+        },
+        "design_chart_style": {
+            "zh_CN": "更多配置",
+            "en_US": "More settings"
+        },
+        "empty_data": {
+            "zh_CN": "空白数据",
+            "en_US": "No data"
+        },
+        "pick_one_option": {
+            "zh_CN": "请选择一个选项",
+            "en_US": "Pick a field"
+        },
+        "search": {
+            "zh_CN": "搜索",
+            "en_US": "Search"
+        },
+        "select_data_source": {
+            "zh_CN": "功能配置",
+            "en_US": "Function settings"
+        },
+        "select_y_axis_field": {
+            "zh_CN": "统计指定字段",
+            "en_US": "Count a field"
+        },
+        "stat_count_all": {
+            "zh_CN": "记录总数",
+            "en_US": "Total"
+        },
+        "summary_widget_add_describle": {
+            "zh_CN": "添加统计值的说明",
+            "en_US": "Add summary description"
+        },
+        "summary_widget_add_target": {
+            "zh_CN": "添加目标值",
+            "en_US": "Add target value"
+        },
+        "summary_widget_select_field": {
+            "zh_CN": "选择一个字段进行统计",
+            "en_US": "Select a field for summary"
+        },
+        "summary_widget_select_view": {
+            "zh_CN": "从下方视图读取数据",
+            "en_US": "Select a view as data source"
+        },
+        "summary_widget_setting": {
+            "zh_CN": "配置小程序",
+            "en_US": "Widget settings"
+        },
+        "summary_widget_setting_help_tips": {
+            "zh_CN": "配置教程",
+            "en_US": "Setting help"
+        },
+        "summary_widget_setting_help_url": {
+            "zh_CN": "/help/intro-widget-summary/ ",
+            "en_US": "/help/intro-widget-summary"
+        },
+        "theme_color": {
+            "zh_CN": "配色",
+            "en_US": "Select color"
+        }
+    }
+}

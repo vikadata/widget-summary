@@ -14,5 +14,5 @@
 为了让大家可以快速体验到这款小程序的用途，这里已经提前做好了一个维格表模板，浏览器打开即可体验
 
 
-[点击体验](https://vika.cn/template/tpc000/tplkMfWM5CJnC/dstPHMvShhnUUQ7lgZ/viwKsbL9WxJ4K)
+[点击体验](https://vika.cn/template/tpc000/tplkMfWM5CJnC/dstCpwjiqHR4kS6bR2/viwUWDbZbDyUR)
 

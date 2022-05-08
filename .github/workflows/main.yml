@@ -23,7 +23,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
     - name: Submit Widget
       run: |
-        npx -y @vikadata/widget-cli submit --ci --host ${{ secrets.WIDGET_HOST }} --token ${{ secrets.VIKA_TOKEN }}
+        npx -y @vikadata/widget-cli submit --ci --host ${{ secrets.VIKA_INTEGRATION_HOST }} --token ${{ secrets.VIKA_INTEGRATION_TOKEN }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:

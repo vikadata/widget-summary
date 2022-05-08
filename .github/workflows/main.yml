@@ -18,8 +18,8 @@ jobs:
         # persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Get yarn cache directory path
-      id: node_modules
-      run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::node_modules"
 
     - uses: actions/cache@v3
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)

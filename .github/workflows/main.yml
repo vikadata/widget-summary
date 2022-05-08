@@ -17,14 +17,30 @@ jobs:
       with:
         # persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+    - uses: actions/cache@v3
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install NPM dependencies
+      run: yarn install
+
     - name: Config git
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
+
     - name: Submit Widget
       run: |
-        yarn install
         npx -y @vikadata/widget-cli submit --ci --host ${{ secrets.VIKA_INTEGRATION_HOST }} --token ${{ secrets.VIKA_INTEGRATION_TOKEN }}
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:

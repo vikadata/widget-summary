@@ -37,9 +37,16 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
 
+    - name: Get submit version
+      id: version
+      uses: ashley-taylor/read-json-property-action@v1.0
+      with:
+        path: ./package.json
+        property: version
+
     - name: Submit Widget
       run: |
-        npx -y @vikadata/widget-cli submit --ci --host ${{ secrets.VIKA_INTEGRATION_HOST }} --token ${{ secrets.VIKA_INTEGRATION_TOKEN }}
+        npx -y @vikadata/widget-cli submit --version ${{steps.version.outputs.value}} --host ${{ secrets.VIKA_INTEGRATION_HOST }} --token ${{ secrets.VIKA_INTEGRATION_TOKEN }}
 
     - name: Push changes
       uses: ad-m/github-push-action@master

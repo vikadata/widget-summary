@@ -1,4 +1,4 @@
-import { defaultTheme, Form, ThemeProvider, Typography } from '@vikadata/components';
+import { Form, Typography } from '@vikadata/components';
 import { Strings } from './i18n';
 import {
   Field, StatType, useCloudStorage, useFields,
@@ -369,25 +369,23 @@ const WidgetSummaryBase: React.FC = () => {
   };
   // console.log({ schema });
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <div style={{ display: 'flex', height: '100%' }}>
-        <Summary openSetting={isShowingSettings} formData={formData} />
-        {
-          <FormWrapper openSetting={isShowingSettings} readOnly={readOnly}>
-            <Form
-              formData={formData}
-              uiSchema={uiSchema}
-              schema={schema}
-              transformErrors={transformErrors}
-              onChange={onFormChange}
-              liveValidate
-            >
-              <div />
-            </Form>
-          </FormWrapper>
-        }
-      </div>
-    </ThemeProvider>
+    <div style={{ display: 'flex', height: '100%' }}>
+      <Summary openSetting={isShowingSettings} formData={formData} />
+      {
+        isShowingSettings && <FormWrapper openSetting={isShowingSettings} readOnly={readOnly}>
+          <Form
+            formData={formData}
+            uiSchema={uiSchema}
+            schema={schema}
+            transformErrors={transformErrors}
+            onChange={onFormChange}
+            liveValidate
+          >
+            <div />
+          </Form>
+        </FormWrapper>
+      }
+    </div>
   );
 };
 

@@ -108,7 +108,7 @@ const Summary = ({ openSetting, formData }) => {
   // 统计值和目标值可计算时，展示比例。
 
   let targetText: string = `${targetValue} `;
-  const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText]);
+  const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText, currentValue.text]);
   const showPercent = isNumeric(targetValue) && isNumeric(currentValue.value);
   if (showPercent) {
     const percent = ((parseFloat(currentValue.value + '') / parseFloat(targetValue)) * 100).toFixed(2);

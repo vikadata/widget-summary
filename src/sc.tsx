@@ -7,6 +7,7 @@ export const SummaryWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   text-align:center;
+  overflow: hidden;
 `;
 
 export const CurrentValueWrapper = styled.div<{ color: string }>`

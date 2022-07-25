@@ -4,7 +4,9 @@ import {
   Field, StatType, useCloudStorage, useFields,
   useRecords, useViewsMeta, useSettingsButton,
   t,
-  ViewPicker
+  ViewPicker,
+  useMeta,
+  RuntimeEnv
 } from '@vikadata/widget-sdk';
 import { useUpdateEffect } from 'ahooks';
 import { isNumber } from 'lodash';
@@ -108,7 +110,7 @@ const Summary = ({ openSetting, formData }) => {
   // 统计值和目标值可计算时，展示比例。
 
   let targetText: string = `${targetValue} `;
-  const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText]);
+  const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText, currentValue.text]);
   const showPercent = isNumeric(targetValue) && isNumeric(currentValue.value);
   if (showPercent) {
     const percent = ((parseFloat(currentValue.value + '') / parseFloat(targetValue)) * 100).toFixed(2);
@@ -168,6 +170,7 @@ const WidgetSummaryBase: React.FC = () => {
 
   const fields = useFields((formData as any)?.dataSource?.view);
   const [isShowingSettings] = useSettingsButton();
+  const { runtimeEnv } = useMeta();
 
   // 统计指标 （只有数字字段可以作为统计指标）
   const metrics = fields;
@@ -372,7 +375,7 @@ const WidgetSummaryBase: React.FC = () => {
     <div style={{ display: 'flex', height: '100%' }}>
       <Summary openSetting={isShowingSettings} formData={formData} />
       {
-        isShowingSettings && <FormWrapper openSetting={isShowingSettings} readOnly={readOnly}>
+        runtimeEnv == RuntimeEnv.Desktop && isShowingSettings && <FormWrapper openSetting={isShowingSettings} readOnly={readOnly}>
           <Form
             formData={formData}
             uiSchema={uiSchema}

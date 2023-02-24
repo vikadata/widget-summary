@@ -1,4 +1,4 @@
-import { Form, Typography } from '@vikadata/components';
+import { Form, Typography } from '@apitable/components';
 import { Strings } from './i18n';
 import {
   Field, StatType, useCloudStorage, useFields,
@@ -7,13 +7,14 @@ import {
   ViewPicker,
   useMeta,
   RuntimeEnv
-} from '@vikadata/widget-sdk';
+} from '@apitable/widget-sdk';
 import { useUpdateEffect } from 'ahooks';
 import { isNumber } from 'lodash';
 import React, { RefObject, useCallback, useRef } from 'react';
 import { FieldSelect } from './form_components/field_select';
 import { getFieldFormEnum, jsonpointer, useResize } from './helper';
 import { CurrentValueWrapper, FormWrapper, SummaryWrapper } from './sc';
+import settings from '../settings.json';
 
 function isNumeric(value) {
   if (isNumber(value)) {
@@ -35,7 +36,7 @@ const metricsTypePointer = jsonpointer.compile('/chartStructure/metricsType');
 
 const Summary = ({ openSetting, formData }) => {
   const viewId = (formData as any)?.dataSource?.view;
-  const color = formData.chartStyle.color || '#7B67EE'; // FIXME: ui 分支合并后从主题中获取
+  const color = formData.chartStyle.color || '#7B67EE'; // FIXME: ui branch merge from the theme.
   const records = useRecords(viewId);
   const fields = useFields((formData as any)?.dataSource?.view);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -107,7 +108,7 @@ const Summary = ({ openSetting, formData }) => {
   };
   const currentValue = getSummary();
   const { targetValue, note } = formData?.chartStyle || {};
-  // 统计值和目标值可计算时，展示比例。
+  // When the statistical value and the target value can be calculated, the scale is displayed.
 
   let targetText: string = `${targetValue} `;
   const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText, currentValue.text]);
@@ -135,9 +136,8 @@ const useGetDefaultFormData = () => {
   const views = useViewsMeta();
   const fields = useFields(views[0].id);
 
-  // 默认表单配置
+  // Default form configuration
   return useCallback(() => {
-  // 默认表单配置
     return {
       dataSource: {
         view: views[0].id,
@@ -146,21 +146,21 @@ const useGetDefaultFormData = () => {
         metricsType: METRICS_TYPES[0],
         metrics: {
           fieldId: fields[0]?.id,
-          statType: fields[0]?.statTypeList[1], // 每个字段的第一个是展示，第二个是总数。  
+          statType: fields[0]?.statTypeList[1], // The first of each field is the display and the second is the total.  
         },
       },
       chartStyle: {
         note: t(Strings.stat_count_all),
-        color: '#7B67EE', // FIXME: 从主题取色
+        color: '#7B67EE', // FIXME: take the color from the theme.
       },
     };
-  // 因为只在第一次使用，所以不需要更新
+  // Since it is only used for the first time, there is no need to update.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
 const WidgetSummaryBase: React.FC = () => {
-  // 新建图表需要的上下文
+  // Context needed for new chart creation.
   const views = useViewsMeta();
   const viewEnum = views.map(view => view.id);
   const viewEnumNames = views.map(view => view.name);
@@ -172,9 +172,9 @@ const WidgetSummaryBase: React.FC = () => {
   const [isShowingSettings] = useSettingsButton();
   const { runtimeEnv } = useMeta();
 
-  // 统计指标 （只有数字字段可以作为统计指标）
+  // Statistical indicators (only numeric fields can be used as statistical indicators).
   const metrics = fields;
-  // 汇总小程序复用统计栏逻辑
+  // Aggregate widget reuse statistics column logic
   const getStatEnums = (field?: Field) => {
     if (!field) {
       return {};
@@ -190,7 +190,7 @@ const WidgetSummaryBase: React.FC = () => {
   const readOnly = !editable;
 
   const metricsField = metrics.find(field => field.id === formData.chartStructure.metrics.fieldId);
-  // 结合上下文配置表单 JSON
+  // Contextual configuration form JSON.
   const schema: any = {
     type: 'object',
     title: t(Strings.summary_widget_setting),
@@ -240,12 +240,12 @@ const WidgetSummaryBase: React.FC = () => {
                     properties: {
                       fieldId: {
                         type: 'string',
-                        title: '统计字段',
+                        title: 'Statistical fields',
                         ...getFieldFormEnum(metrics),
                       },
                       statType: {
                         type: 'number',
-                        title: '聚合类型',
+                        title: 'Aggregation Type',
                         ...getStatEnums(metricsField),
                       },
                     },
@@ -269,7 +269,7 @@ const WidgetSummaryBase: React.FC = () => {
             type: 'string',
           },
           color: {
-            title: t(Strings.theme_color), // '配色',
+            title: t(Strings.theme_color), // 'Color Matching',
             type: 'string',
           },
         },
@@ -277,7 +277,7 @@ const WidgetSummaryBase: React.FC = () => {
     },
   };
 
-  // 统计字段的类型变化时。
+  // When the type of the statistics field changes.
   useUpdateEffect(() => {
     const statTypeList = metricsField?.statTypeList.filter(statType => statType !== StatType.CountAll);
     if (statTypeList && !statTypeList.includes(metricsStatTypePointer.get(formData))) {
@@ -290,7 +290,8 @@ const WidgetSummaryBase: React.FC = () => {
   const onFormChange = (data: any) => {
     const nextFormData = data.formData;
     // console.log({ nextFormData });
-    // 切换字段时，上一个字段的统计类型，可能不存在于下一个字段的统计类型中，需要调整默认值。
+    // When switching fields, the statistical type of the previous field, 
+    // may not exist in the statistical type of the next field, and the default value needs to be adjusted.
     try {
       if (
         metricsTypePointer.get(nextFormData) === METRICS_TYPES[1] ||
@@ -313,7 +314,7 @@ const WidgetSummaryBase: React.FC = () => {
     'ui:options': {
       help: {
         text: t(Strings.summary_widget_setting_help_tips),
-        url: t(Strings.summary_widget_setting_help_url),
+        url: settings.summary_widget_setting_help_url,
       },
     },
     chartStyle: {

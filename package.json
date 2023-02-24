@@ -1,13 +1,13 @@
 {
   "version": "1.0.52",
-  "description": "my vika widget chart",
+  "description": "my apitable widget chart",
   "engines": {
     "node": ">=8.x"
   },
   "keywords": [
-    "vika",
+    "apitable",
     "widgets",
-    "vika widgets"
+    "apitable widgets"
   ],
   "main": "./dist/index",
   "module": "./dist/index",
@@ -29,16 +29,13 @@
     "@types/node": "^16.4.10",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
-    "@vikadata/components": "^0.0.2",
-    "@vikadata/core": "^0.0.1",
-    "@vikadata/icons": "^0.0.1",
-    "@vikadata/widget-sdk": "^0.0.1",
+    "@apitable/components": "latest",
+    "@apitable/core": "latest",
+    "@apitable/icons": "latest",
+    "@apitable/widget-sdk": "latest",
     "ahooks": "^2.10.0",
     "lodash": "^4.17.20",
     "styled-components": ">=5.2.1",
     "typescript": "4.1.2"
-  },
-  "authorName": "Vika",
-  "authorLink": "https://vika.cn/developers",
-  "authorEmail": "developer@vikadata.com"
+  }
 }

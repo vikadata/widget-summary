@@ -68,10 +68,6 @@
             "zh_CN": "配置教程",
             "en_US": "Setting help"
         },
-        "summary_widget_setting_help_url": {
-            "zh_CN": "https://help.vika.cn/docs/guide/intro-widget-summary",
-            "en_US": "https://help.vika.cn/docs/guide/intro-widget-summary"
-        },
         "theme_color": {
             "zh_CN": "配色",
             "en_US": "Select color"

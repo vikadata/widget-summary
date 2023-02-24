@@ -16,7 +16,7 @@ export const useResize = (cb: ((rect: DOMRectReadOnly) => void), dep: any[] = []
 
       observer.observe(resizeObserverRef.current!);
     } catch (error) {
-      console.error('当前浏览器不支持 ResizeObserver');
+      console.error('Current browser does not support ResizeObserver');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resizeCallback, resizeObserverRef, ...dep]);

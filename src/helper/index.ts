@@ -1,4 +1,4 @@
-import { Field } from '@vikadata/widget-sdk';
+import { Field } from '@apitable/widget-sdk';
 
 export * as jsonpointer from './jsonpointer';
 export * from './use_resize';

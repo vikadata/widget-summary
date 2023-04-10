@@ -26,6 +26,7 @@ import {
   ColumnPhoneFilled,
   ColumnLookupFilled,
   ColumnRatingFilled,
+  CascadeOutlined,
 } from '@apitable/icons';
 import styled from 'styled-components';
 import { Strings } from '../i18n';
@@ -55,6 +56,7 @@ const FieldIconMap = {
   [FieldType.LastModifiedTime]: ColumnLastmodifiedtimeFilled,
   [FieldType.CreatedBy]: ColumnCreatedbyFilled,
   [FieldType.LastModifiedBy]: ColumnLastmodifiedbyFilled,
+  [FieldType.Cascader]: CascadeOutlined
 };
 
 const transformOptions = (enumOptions: { label: string, value: any }[], theme: ITheme) => {
@@ -69,7 +71,7 @@ const transformOptions = (enumOptions: { label: string, value: any }[], theme: I
     const FieldIcon = FieldIconMap[field.type];
     return {
       ...res,
-      prefixIcon: <FieldIcon color={theme.palette.text.third} />,
+      prefixIcon: FieldIcon ? <FieldIcon color={theme.palette.text.third} /> : null,
     };
   });
 };

@@ -15,6 +15,7 @@ import { FieldSelect } from './form_components/field_select';
 import { getFieldFormEnum, jsonpointer, useResize } from './helper';
 import { CurrentValueWrapper, FormWrapper, SummaryWrapper } from './sc';
 import settings from '../settings.json';
+import { FilterSelect } from './form_components';
 
 function isNumeric(value) {
   if (isNumber(value)) {
@@ -37,7 +38,7 @@ const metricsTypePointer = jsonpointer.compile('/chartStructure/metricsType');
 const Summary = ({ openSetting, formData }) => {
   const viewId = (formData as any)?.dataSource?.view;
   const color = formData.chartStyle.color || '#7B67EE'; // FIXME: ui branch merge from the theme.
-  const records = useRecords(viewId);
+  const records = useRecords(viewId, { filter: formData?.dataSource?.filter });
   const fields = useFields((formData as any)?.dataSource?.view);
   const innerRef = useRef<HTMLDivElement>(null);
   const resizeHandler = ({ width, height }) => {
@@ -141,6 +142,7 @@ const useGetDefaultFormData = () => {
     return {
       dataSource: {
         view: views[0].id,
+        filter: null,
       },
       chartStructure: {
         metricsType: METRICS_TYPES[0],
@@ -205,6 +207,9 @@ const WidgetSummaryBase: React.FC = () => {
             enum: viewEnum,
             enumNames: viewEnumNames,
           },
+          filter: {
+            type: 'string'
+          }
         },
       },
       chartStructure: {
@@ -333,7 +338,15 @@ const WidgetSummaryBase: React.FC = () => {
         'ui:widget': (props) => {
           return <ViewPicker placeholder={t(Strings.pick_one_option)} controlJump viewId={props.value} onChange={option => props.onChange(option.value)} />;
         },
-      }
+      },
+      filter: {
+        'ui:options': {
+          showTitle: false,
+        },
+        'ui:widget': (props) => {
+          return <FilterSelect value={props.value} onChange={filter => props.onChange(filter)}/>;
+        },
+      },
     },
     chartStructure: {
       'ui:options': {

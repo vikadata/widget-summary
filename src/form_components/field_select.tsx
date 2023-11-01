@@ -27,6 +27,8 @@ import {
   ColumnLookupFilled,
   ColumnRatingFilled,
   CascadeOutlined,
+  OneWayLinkOutlined,
+  TwoWayLinkOutlined
 } from '@apitable/icons';
 import styled from 'styled-components';
 import { Strings } from '../i18n';
@@ -39,6 +41,8 @@ const FieldIconMap = {
   [FieldType.MultiSelect]: ColumnMultipleFilled,
   [FieldType.DateTime]: ColumnCalendarFilled, // FIXME: icon there is a problem with the naming.
   [FieldType.Attachment]: ColumnAttachmentFilled,
+  [FieldType.OneWayLink]: OneWayLinkOutlined,
+  [FieldType.TwoWayLink]: TwoWayLinkOutlined,
   [FieldType.MagicLink]: ColumnLinktableFilled, // ?
   [FieldType.URL]: ColumnUrlOutlined,
   [FieldType.Email]: ColumnEmailFilled,

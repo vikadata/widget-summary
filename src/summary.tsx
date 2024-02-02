@@ -113,7 +113,8 @@ const Summary = ({ openSetting, formData }) => {
 
   let targetText: string = `${targetValue} `;
   const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText, currentValue.text]);
-  const showPercent = isNumeric(targetValue) && isNumeric(currentValue.value);
+  let v = Number(currentValue.value.toString().replaceAll(",", ""))
+  const showPercent = isNumeric(targetValue) && isNumeric(v);
   if (showPercent) {
     const percent = ((parseFloat(currentValue.value + '') / parseFloat(targetValue)) * 100).toFixed(2);
     targetText += `( ${percent} %)`;
@@ -148,7 +149,7 @@ const useGetDefaultFormData = () => {
         metricsType: METRICS_TYPES[0],
         metrics: {
           fieldId: fields[0]?.id,
-          statType: fields[0]?.statTypeList[1], // The first of each field is the display and the second is the total.  
+          statType: fields[0]?.statTypeList[1], // The first of each field is the display and the second is the total.
         },
       },
       chartStyle: {
@@ -166,7 +167,7 @@ const WidgetSummaryBase: React.FC = () => {
   const views = useViewsMeta();
   const viewEnum = views.map(view => view.id);
   const viewEnumNames = views.map(view => view.name);
-  
+
   const defaultFormData = useGetDefaultFormData();
   const [formData, setFormData, editable] = useCloudStorage('FormData', defaultFormData);
 
@@ -295,7 +296,7 @@ const WidgetSummaryBase: React.FC = () => {
   const onFormChange = (data: any) => {
     const nextFormData = data.formData;
     // console.log({ nextFormData });
-    // When switching fields, the statistical type of the previous field, 
+    // When switching fields, the statistical type of the previous field,
     // may not exist in the statistical type of the next field, and the default value needs to be adjusted.
     try {
       if (

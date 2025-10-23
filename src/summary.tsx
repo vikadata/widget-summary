@@ -28,6 +28,17 @@ function isNumeric(value) {
     !isNaN(parseFloat(value));
 }
 
+function formatNumberWithCommas(value: number | string): string {
+  if (value == null || value === '') {
+    return '';
+  }
+  const num = typeof value === 'string' ? parseFloat(value) : value;
+  if (isNaN(num)) {
+    return value.toString();
+  }
+  return num.toLocaleString();
+}
+
 const METRICS_TYPES = ['COUNT_RECORDS', 'AGGREGATION_BY_FIELD'];
 const METRICS_TYPES_NAMES = [t(Strings.count_records), t(Strings.select_y_axis_field)];
 
@@ -111,7 +122,7 @@ const Summary = ({ openSetting, formData }) => {
   const { targetValue, note } = formData?.chartStyle || {};
   // When the statistical value and the target value can be calculated, the scale is displayed.
 
-  let targetText: string = `${targetValue} `;
+  let targetText: string = `${formatNumberWithCommas(targetValue)} `;
   const resizeObserverRef = useResize(resizeHandler, [note, targetValue, targetText, currentValue.text]);
   let v = Number(currentValue.value.toString().replaceAll(",", ""))
   const showPercent = isNumeric(targetValue) && isNumeric(v);
@@ -127,7 +138,7 @@ const Summary = ({ openSetting, formData }) => {
       <CurrentValueWrapper color={color}>
         {currentValue.text}
       </CurrentValueWrapper>
-      <Typography variant="body1">
+      <Typography variant="h3">
         {targetValue && targetText}
       </Typography>
     </div>

@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.8.5",
   "description": "my apitable widget chart",
   "engines": {
     "node": ">=8.x"

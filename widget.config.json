@@ -17,5 +17,5 @@
     "zh-CN": "突出展示指定维格列的统计值和目标值，作为关键指标，比如销售额、订单数、注册用户数、Bug 数等",
     "en-US": "Highlight statistics and target values for the specified fields as key metrics, such as sales volumes, number of orders, number of registered users, etc."
   },
-  "website": "https://bbs.vika.cn/article/114"
+  "website": "https://help.vika.cn/docs/guide/intro-widget-summary/"
 }
